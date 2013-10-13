@@ -33,13 +33,13 @@ namespace DispatchQueue
 	{
 		#region IDispatcher implementation
 
-		public IQueue CreateQueue(string name = null)
+		public IActionQueue CreateQueue(string name = null)
 		{
 			if (name == null)
 			{
 				name = Interlocked.Increment(ref queueId).ToString ();
 			}
-			Queue queue = new Queue(name, this);
+			ActionQueue queue = new ActionQueue(name, this);
 			lock (mapLock)
 			{
 				mapQueues.Add(queue.Name, new WeakReference(queue,false) );
@@ -47,7 +47,7 @@ namespace DispatchQueue
 			return queue;
 		}
 
-		public IQueue GetQueueByName(string name)
+		public IActionQueue GetQueueByName(string name)
 		{
 			WeakReference queueRef = null;
 			lock (mapLock)
@@ -58,7 +58,7 @@ namespace DispatchQueue
 			{
 				if (queueRef.IsAlive)
 				{
-					return (IQueue)queueRef.Target;
+					return (IActionQueue)queueRef.Target;
 				}
 				else
 				{
@@ -98,7 +98,7 @@ namespace DispatchQueue
 						{
 							if (queueRef.IsAlive)
 							{
-								Queue q = (Queue) queueRef.Target;
+								ActionQueue q = (ActionQueue) queueRef.Target;
 								q.DisconnectDispatcher();
 								q.Dispose();
 							}
@@ -115,7 +115,7 @@ namespace DispatchQueue
 
 		#region internals exposed for Queue class
 
-		internal abstract void SubmitQueueForProcessing(Queue queue);
+		internal abstract void SubmitQueueForProcessing(ActionQueue queue);
 	
 		internal void DeleteQueue(string name)
 		{

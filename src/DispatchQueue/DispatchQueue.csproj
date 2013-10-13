@@ -35,10 +35,10 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IDispatcher.cs" />
-    <Compile Include="IQueue.cs" />
-    <Compile Include="Queue.cs" />
     <Compile Include="Dispatcher.cs" />
     <Compile Include="ManualDispatcher.cs" />
+    <Compile Include="IActionQueue.cs" />
+    <Compile Include="ActionQueue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

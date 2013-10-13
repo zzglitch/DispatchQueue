@@ -1,5 +1,5 @@
 //
-// IDispatcher.cs
+// IDispatchQueue.cs
 //
 // Author:
 //       Chad Barry <zzglitch@hotmail.com>
@@ -27,20 +27,24 @@ using System;
 
 namespace DispatchQueue
 {
-	public interface IDispatcher
+	public interface IActionQueue
 	{
 		/// <summary>
-		/// Create a new action queue associated this dispatcher.
+		/// Enqueue the specified action.
 		/// </summary>
-		/// <returns>The queue.</returns>
-		/// <param name="name">Optional name for the queue.</param>
-		IActionQueue CreateQueue(string name = null);
+		/// <param name="action">Action.</param>
+		void Enqueue(Action action);
 
 		/// <summary>
-		/// Looks up a queue by name
+		/// Gets the queue's name.
 		/// </summary>
-		/// <returns>The queue by name.</returns>
-		/// <param name="name"></param>
-		IActionQueue GetQueueByName(string name);
+		/// <value>The name.</value>
+		string Name { get; }
+
+		/// <summary>
+		/// Gets the dispatcher associated with the queue.
+		/// </summary>
+		/// <value>The dispatcher.</value>
+		IDispatcher Dispatcher { get; }
 	}
 }

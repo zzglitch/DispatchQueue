@@ -39,8 +39,8 @@ namespace DispatchQueue
 
 		public void ProcessQueues()
 		{
-			// swap lists so we don't have to lock during processing
-			List<Queue> processList = null;
+			// swap lists so we don't lock during processing
+			List<ActionQueue> processList = null;
 			lock (listLock)
 			{
 				processList = pendingList;
@@ -51,8 +51,9 @@ namespace DispatchQueue
 			}
 
 			// process the queues
-			foreach (Queue q in processList)
-				q.ProcessQueue();
+			int count = processList.Count;
+			for (int i = 0; i < count; i++)
+				processList[i].ProcessQueue();
 			processList.Clear();
 		}
 
@@ -60,7 +61,7 @@ namespace DispatchQueue
 
 		#region internals exposed for Queue class
 
-		internal override void SubmitQueueForProcessing(Queue queue)
+		internal override void SubmitQueueForProcessing(ActionQueue queue)
 		{
 			lock (listLock)
 			{
@@ -96,12 +97,11 @@ namespace DispatchQueue
 		#region internal variables
 
 		// double buffer lists to reduce locking
-		private List<Queue> pendingList = null;
-		private List<Queue> pendingListA = new List<Queue>();
-		private List<Queue> pendingListB = new List<Queue>();
+		private List<ActionQueue> pendingList = null;
+		private List<ActionQueue> pendingListA = new List<ActionQueue>();
+		private List<ActionQueue> pendingListB = new List<ActionQueue>();
 		private readonly object listLock = new object();
 
 		#endregion internal variables
 	}
 }
-
