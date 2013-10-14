@@ -28,6 +28,13 @@ using System.Collections.Generic;
 
 namespace DispatchQueue
 {
+	/// <summary>
+	/// A manual dispatcher that requires an explicit call to ProcessQueues
+	/// to process queues with pending actions.  An example use case is calling
+	/// ManualDispatcher.ProcessQueue on a Unity3D GameObject update function
+	/// to force the queued actions to execute in the main thread and within
+	/// Unity's standard tick order.
+	/// </summary>
 	public class ManualDispatcher : Dispatcher
 	{
 		#region External API

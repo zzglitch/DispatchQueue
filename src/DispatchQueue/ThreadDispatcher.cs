@@ -29,6 +29,9 @@ using System.Collections.Generic;
 
 namespace DispatchQueue
 {
+	/// <summary>
+	/// A dispatcher that uses a single worker thread for processing queued actions.
+	/// </summary>
 	public class ThreadDispatcher : Dispatcher
 	{
 		#region External API

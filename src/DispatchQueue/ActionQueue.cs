@@ -62,7 +62,6 @@ namespace DispatchQueue
 			get { return dispatcher; }
 		}
 
-
 		#endregion IQueue implementation
 
 		#region IDisposable implementation
@@ -133,7 +132,8 @@ namespace DispatchQueue
 				Monitor.Exit(processLock);
 				submitPending = false;
 
-				// if action was added during processing, re-submit for processing
+				// If an action was added during processing, re-submit
+				// queue for processing.
 				lock (queueLock)
 				{
 					if ((actions != null) && (actions.Count > 0))
