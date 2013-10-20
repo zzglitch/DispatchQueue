@@ -40,6 +40,7 @@
     <Compile Include="IActionQueue.cs" />
     <Compile Include="ActionQueue.cs" />
     <Compile Include="ThreadDispatcher.cs" />
+    <Compile Include="ThreadPoolDispatcher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
