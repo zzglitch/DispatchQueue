@@ -1,5 +1,5 @@
 //
-// ThreadDispatcherTests.cs
+// ThreadPoolDispatcherTests.cs
 //
 // Author:
 //       Chad Barry <zzglitch@hotmail.com>
@@ -30,15 +30,16 @@ using DispatchQueue;
 
 namespace DispatchQueue.Test
 {
-	public class ThreadDispatcherTests
+	[TestFixture()]
+	public class ThreadPoolDispatcherTests
 	{
 		private volatile int counter = 0;
 		private volatile bool failed = false;
 
 		[Test ()]
-		public void BasicThreadQueue()
+		public void BasicThreadPoolQueue()
 		{
-			ThreadDispatcher dispatcher = new ThreadDispatcher();
+			ThreadPoolDispatcher dispatcher = new ThreadPoolDispatcher();
 
 			// test CreateQueue - succeeds
 			IActionQueue queue = dispatcher.CreateQueue();
@@ -68,4 +69,3 @@ namespace DispatchQueue.Test
 		}
 	}
 }
-

@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="ManualDispatcherTests.cs" />
     <Compile Include="ThreadDispatcherTests.cs" />
+    <Compile Include="ThreadPoolDispatcherTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

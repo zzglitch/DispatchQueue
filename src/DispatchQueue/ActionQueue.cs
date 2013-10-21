@@ -132,8 +132,8 @@ namespace DispatchQueue
 				Monitor.Exit(processLock);
 				submitPending = false;
 
-				// If an action was added during processing, re-submit
-				// queue for processing.
+				// If an action was added during processing, 
+				// re-submit queue for processing.
 				lock (queueLock)
 				{
 					if ((actions != null) && (actions.Count > 0))

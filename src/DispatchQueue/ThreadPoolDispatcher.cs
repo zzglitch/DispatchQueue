@@ -24,37 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Threading;
 
 namespace DispatchQueue
 {
 	public class ThreadPoolDispatcher : Dispatcher
 	{
-		public ThreadPoolDispatcher ()
-		{
-		}
-
 		#region internals exposed for Queue class
 
 		internal override void SubmitQueueForProcessing(ActionQueue queue)
 		{
+			ThreadPool.QueueUserWorkItem( (object state) => { queue.ProcessQueue(); } );
 		}
 
 		#endregion internals exposed for Queue class
-
-		#region IDispose implementation
-
-		protected override void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-				}
-			}
-			base.Dispose(disposing);
-		}
-
-		#endregion IDispose implementation
 	}
 }
-
